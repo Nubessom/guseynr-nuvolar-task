@@ -1,0 +1,15 @@
+.form-container {
+    background-color: white;
+    width: 30%;
+    padding: 1rem;
+}
+
+.custom-card {
+    width: 30%;
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

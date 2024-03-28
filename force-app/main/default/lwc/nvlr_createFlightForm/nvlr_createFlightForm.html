@@ -1,0 +1,47 @@
+<template>
+    <div class="slds-card custom-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span>{cardHeader}</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner create-form">
+            <div class="spinner">
+                <lightning-spinner alternative-text="Loading" size="small" lwc:if={showSpinner}></lightning-spinner>
+            </div>
+            <template lwc:if={flightCreated}>
+                <lightning-record-view-form object-api-name={objectApiName}
+                                            record-id={flightId}>
+                    <lightning-output-field field-name={departureField}> </lightning-output-field>
+                    <lightning-output-field field-name={arrivalField}> </lightning-output-field>
+                    <lightning-output-field field-name={distanceField}> </lightning-output-field>
+                </lightning-record-view-form>
+            </template>
+            <template lwc:else>
+                <div class="input-container">
+                    <lightning-record-picker label="Departure"
+                                             placeholder="Search Airports..."
+                                             object-api-name="NVLR_Airport__c"
+                                             display-info={displayInfo}
+                                             matching-info={matchingInfo}
+                                             onchange={handleDepartureChange}>
+                    </lightning-record-picker>
+                    <lightning-record-picker label="Arrival"
+                                             placeholder="Search Airports..."
+                                             object-api-name="NVLR_Airport__c"
+                                             display-info={displayInfo}
+                                             matching-info={matchingInfo}
+                                             onchange={handleArrivalChange}>
+                    </lightning-record-picker>
+                </div>
+                <div class="btn-container">
+                    <lightning-button variant="brand" label="Create Flight" onclick={handleSave}></lightning-button>
+                </div>
+            </template>
+        </div>
+    </div>
+  </template>
